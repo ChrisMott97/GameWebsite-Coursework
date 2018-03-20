@@ -1,0 +1,119 @@
+body{
+    font-family: 'Quicksand', sans-serif;
+    background-image: url("../images/bg_blur.jpg");
+    background-size: 1920px auto;
+    background-position: top;
+}
+
+h1{
+    font-size: 50px;
+}
+
+.card>.right>.heading{
+    font-size: 25px;
+}
+
+.card>.right{
+    width: 50%;
+    padding-top: 75px;
+    float: right;
+    color: white;
+}
+
+.card>.left{
+    width: 49%;
+    background-color: transparent;
+    border-right-color: rgba(0, 0, 0, 0.226);
+    border-right-style: solid;
+    float:left;
+    color: white;
+    margin-top: 40px;
+    height: 80%;
+}
+
+.card-container{
+    width: 700px;
+    height: 400px;
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: 80px;
+}
+
+
+.card-bg{
+    filter: blur(0px);
+    background-image: url("../images/bg.jpg");
+    background-size: 1920px auto;
+    background-position-x: -610px;
+    background-position-y: -160px;
+    margin-right: inherit;
+    margin-left: inherit;
+    margin-top: inherit;
+    width: inherit;
+    height: inherit;
+    position: absolute;
+}
+
+.card{
+    position: absolute;
+    width: inherit;
+    height: inherit;
+    background-color: rgba(255, 255, 255, 0.233);
+    margin-right: inherit;
+    margin-left: inherit;
+    margin-top: inherit;
+    text-align: center;
+    box-shadow: 5px 5px 30px 5px rgba(0, 0, 0, 0.288);
+}
+
+.card>.right>form{
+    padding: 40px;
+    
+}
+
+.card>.right>form>input[type=text]{
+    background-image: url("../images/person.svg");
+    background-position: left;
+    background-repeat: no-repeat;
+}
+
+.card>.right>form>input[type=password]{
+    background-image: url("../images/lock.svg");
+    background-position: left;
+    background-repeat: no-repeat;
+}
+
+.card>.right>form>input[type=text],
+.card>.right>form>input[type=password]{
+    font-size: 17px;
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 8px;
+    padding-left: 25px;
+    margin-top: 10px;
+    border-color: transparent;
+    border-bottom-color: rgba(0, 0, 0, 0.349);
+    background-color: inherit;
+}
+
+.card>.right>form>input[type=text]:hover,
+.card>.right>form>input[type=password]:hover{
+    border-bottom-color: rgba(0, 0, 0, 0.788);
+}
+
+.card>.right>form>button[type=submit]{
+    font-size: 20px;
+    padding: 5px 25px;
+    margin: 20px;
+    border-radius: 40px;
+    box-shadow: 4px 4px 5px rgba(0, 0, 0, 0.514);
+    background-color: rgb(167, 13, 13);
+    color: white;
+}
+
+.card>.right>form>button[type=submit]:hover{
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.514);
+    cursor: pointer;
+}
+
