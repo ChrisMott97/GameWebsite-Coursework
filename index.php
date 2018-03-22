@@ -8,6 +8,7 @@
     </head>
     <body>
         <?php include_once("./setup.php"); ?>
+        <?php include_once("./view_setup.php"); ?>
         <script src="./js/app.js"></script>
     </body>
 </html>

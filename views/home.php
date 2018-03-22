@@ -1,4 +1,8 @@
 <div id="home" style="display: none;">
-    Home page!
-    <a href="/cm740/coursework/#/login">Login!</a>
+    <?php
+        if(isset($_SESSION['username'])){
+            $user = UserFactory::find($_SESSION['username']);
+            include("partials/home_view.php");
+        }
+    ?>
 </div>

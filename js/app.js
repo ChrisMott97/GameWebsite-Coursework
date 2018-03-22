@@ -4,19 +4,57 @@ window.onload = setup();
 
 window.onhashchange = function() {
     get("login", function(){
-        render("login");
+        isLoggedIn(function(success){
+            if(success){
+                window.location.replace("/cm740/coursework/#/home");
+            }else{
+                render("login");
+            }
+        })
     })
     get("home", function(){
-        render("home")
+        isLoggedIn(function(success){
+            if(success){
+                render("home")
+            }else{
+                window.location.replace("/cm740/coursework/#/login");
+            }
+        })
+    })
+    get("logout", function(){
+        window.location.replace("/cm740/coursework/logout.php");
     })
     error(function(){
-        window.location.replace("/cm740/coursework/#/login");
+        isLoggedIn(function(success){
+            if(success){
+                window.location.replace("/cm740/coursework/#/home");
+            }else{
+                window.location.replace("/cm740/coursework/#/login");
+            }
+        })
+        
     })
 }
 
 document.getElementById("submit_login").onclick = function(event){
     event.preventDefault();
-    window.location.replace("/cm740/coursework/#/home");
+    var username = document.getElementById("username").value;
+    var password = document.getElementById("password").value;
+
+    var formData = new FormData();
+    formData.append("username", username);
+    formData.append("password", password);
+
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function(){
+        if(this.readyState == 4 && this.status == 200){
+            console.log("success");
+            window.location.replace("/cm740/coursework/");
+        }
+    };
+    xhttp.open("POST", "/cm740/coursework/login.php", true);
+    xhttp.send(formData);
+
 }
 
 function setup(){
@@ -59,4 +97,20 @@ function error(func){
             func()
         }
     })
+}
+
+function isLoggedIn(callback){
+    var xhttp = new XMLHttpRequest();
+    xhttp.open("POST", "/cm740/coursework/is_logged_in.php", true);
+    xhttp.send();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            if(JSON.parse(this.response)){
+                console.log("logged");
+                callback(true);
+            }else{
+                callback(false);
+            }
+        }
+    };
 }

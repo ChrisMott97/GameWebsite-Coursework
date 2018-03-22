@@ -1,9 +1,23 @@
 <?php
-$files = array_slice(scandir('./views'), 2);
-
-foreach ($files as $file) {
-    $link = "./views/".$file;
-    if(file_exists($link)){
-        include_once($link);
+session_start();
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+$models = array_slice(scandir('./models'), 2);
+foreach ($models as $model){
+    $model_path = "./models/".$model;
+    if(file_exists($model_path)){
+        include_once($model_path);
     }
+};
+
+
+$db = new mysqli('localhost', 'root', 'root', 'videogamestore');
+if($db->connect_errno > 0){
+    die('Unable to connect to database [' . $db->connect_error . ']');
 }
+
+UserFactory::setDependencies($db);
+// $user = UserFactory::create("cm740", "newpass", "Chris", "Mott", 1);
+// $user->save();
+// var_dump(UserFactory::auth("cm740", "newpass"));
