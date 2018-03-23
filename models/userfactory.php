@@ -19,12 +19,11 @@ class UserFactory {
             $firstname,
             $lastname,
             $permission,
-            $created_at,
             $updated_at
         );
         while($statement->fetch()){
             $user = new User();
-            $user->read($id, $username, $password, $firstname, $lastname, $permission, $created_at, $updated_at);
+            $user->read($id, $username, $password, $firstname, $lastname, $permission, $updated_at);
             return $user;
         }
         $statement->close();

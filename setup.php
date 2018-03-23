@@ -3,6 +3,9 @@ session_start();
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
+
+require("password.php");
+
 $models = array_slice(scandir('./models'), 2);
 foreach ($models as $model){
     $model_path = "./models/".$model;
@@ -12,7 +15,7 @@ foreach ($models as $model){
 };
 
 
-$db = new mysqli('localhost', 'root', 'root', 'videogamestore');
+$db = new mysqli('localhost', 'cm740', 'cm740', 'cm740');
 if($db->connect_errno > 0){
     die('Unable to connect to database [' . $db->connect_error . ']');
 }

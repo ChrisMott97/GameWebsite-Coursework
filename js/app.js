@@ -6,16 +6,29 @@ window.onhashchange = function() {
     get("login", function(){
         isLoggedIn(function(success){
             if(success){
-                window.location.replace("/cm740/coursework/#/home");
+                window.location.replace("/cm740/coursework/#/dashboard");
             }else{
                 render("login");
             }
         })
     })
-    get("home", function(){
+    get("dashboard", function(){
         isLoggedIn(function(success){
             if(success){
-                render("home")
+                document.getElementById("to_dashboard").className = "active";
+                document.getElementById("to_users").removeAttribute("class");
+                render("dashboard")
+            }else{
+                window.location.replace("/cm740/coursework/#/login");
+            }
+        })
+    })
+    get("users", function(){
+        isLoggedIn(function(success){
+            if(success){
+                document.getElementById("to_dashboard").removeAttribute("class");
+                document.getElementById("to_users").className = "active";
+                render("dashboard", "users");
             }else{
                 window.location.replace("/cm740/coursework/#/login");
             }
@@ -27,7 +40,7 @@ window.onhashchange = function() {
     error(function(){
         isLoggedIn(function(success){
             if(success){
-                window.location.replace("/cm740/coursework/#/home");
+                window.location.replace("/cm740/coursework/#/dashboard");
             }else{
                 window.location.replace("/cm740/coursework/#/login");
             }
@@ -36,26 +49,36 @@ window.onhashchange = function() {
     })
 }
 
-document.getElementById("submit_login").onclick = function(event){
-    event.preventDefault();
-    var username = document.getElementById("username").value;
-    var password = document.getElementById("password").value;
-
-    var formData = new FormData();
-    formData.append("username", username);
-    formData.append("password", password);
-
-    var xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function(){
-        if(this.readyState == 4 && this.status == 200){
-            console.log("success");
-            window.location.replace("/cm740/coursework/");
-        }
-    };
-    xhttp.open("POST", "/cm740/coursework/login.php", true);
-    xhttp.send(formData);
-
+if(document.getElementById("submit_login") != null){
+    document.getElementById("submit_login").onclick = function(event){
+        event.preventDefault();
+        var username = document.getElementById("username").value;
+        var password = document.getElementById("password").value;
+    
+        var formData = new FormData();
+        formData.append("username", username);
+        formData.append("password", password);
+    
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function(){
+            if(this.readyState == 4 && this.status == 200){
+                console.log("success");
+                window.location.replace("/cm740/coursework/");
+            }
+        };
+        xhttp.open("POST", "/cm740/coursework/login.php", true);
+        xhttp.send(formData);
+    
+    }
 }
+
+document.getElementById("to_dashboard").onclick = function(e){
+    window.location.replace("/cm740/coursework/#/dashboard");
+}
+document.getElementById("to_users").onclick = function(){
+    window.location.replace("/cm740/coursework/#/users");
+}
+
 
 function setup(){
     var xhttp = new XMLHttpRequest();
@@ -72,11 +95,14 @@ function setup(){
     xhttp.send();
 }
 
-function render(page){
+function render(page, except = null){
     if(pages.includes(page)){
         document.getElementById(page).style.removeProperty("display");
+        if(except != null){
+            document.getElementById(except).style.removeProperty("display");
+        }
         pages.forEach(paper => {
-            if(paper != page){
+            if((paper != page) && (paper != except)){
                 document.getElementById(paper).style.setProperty("display", "none");
             }
         });

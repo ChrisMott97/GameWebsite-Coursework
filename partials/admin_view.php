@@ -1,9 +1,9 @@
 <div class="nav">
     <div class="picture"></div>
     <ul>
-        <li>Dashboard</li>
-        <li>Users</li>
-        <li>Stock</li>
+        <li id="to_dashboard">Dashboard</li>
+        <li id="to_users">Users</li>
+        <li id="to_stock">Stock</li>
     </ul>
 </div>
 <div class="content">
@@ -13,4 +13,5 @@
             <li><a href="#"><i class="material-icons">person_outline</i></a></li>
         </ul>
     </div>
+    <?php include("views/users.php"); ?>
 </div>
